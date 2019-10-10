@@ -2,8 +2,13 @@
 #- name: Gather instance facts
 #  setup:
 
-- include_tasks: "install.yml"
+#- include_tasks: "install.yml"
 
+
+- include_tasks: configure-network.yml
+  with_items: "{{ wireguard_networks }}"
+  tags:
+    - configure
 
 #  
 #- name: Set WireGuard IP (without mask)
