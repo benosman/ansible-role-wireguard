@@ -37,8 +37,9 @@
 {% endfor %}
 
 {% for peer in peers %}
+{%- if peer['name'] != interface.get('name', inventory_hostname) %}    
 [Peer]
-# Peer: {{ peer.get("name", loop.index) }}
+# Peer: {{ peer['name'] }}
 {% for key, option in peer_required_keys.items() %}
 {{ option }} = {{ peer[key] }}
 {% endfor %}
@@ -47,5 +48,5 @@
 {{ option }} = {{ peer[key] }}
 {% endif %}
 {% endfor %}
-
+{% endif %}
 {% endfor %}

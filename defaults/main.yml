@@ -28,6 +28,7 @@ wireguard_networks: []
 #       # persistent_keepalive:
 
 # wireguard_wg0_interface:
+#   name: 
 #   address:
 #   private_key:
 #   # listen_port:
