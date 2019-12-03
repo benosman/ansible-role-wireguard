@@ -2,7 +2,7 @@
 - name: Configure {{ item }}
   template:
     src: wg.conf.j2
-    dest: /etc/wireguard/{{ item }}.conf
+    dest: "{{ wireguard_remote_directory }}/{{ item }}.conf"
     mode: 0600
   register: configuration
 

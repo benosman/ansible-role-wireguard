@@ -1,0 +1,21 @@
+---
+
+- name: Install WireGuard
+  homebrew:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wireguard-tools
+  tags:
+    - wg-install
+    - skip_ansible_lint
+
+
+- name: Create WireGuard configuration directory
+  file:
+    dest: "{{ wireguard_macos_remote_directory }}"
+    state: directory
+    mode: 0700
+  tags:
+   - wg-config

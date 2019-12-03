@@ -2,34 +2,10 @@
 #- name: Gather instance facts
 #  setup:
 
-#- include_tasks: "install.yml"
+- include_tasks: "install.yml"
+  when: wireguard_install
 
-
-- include_tasks: configure-network.yml
+- include_tasks: "configure/{{ ansible_system|lower }}.yml"
   with_items: "{{ wireguard_networks }}"
   tags:
     - configure
-
-#  
-#- name: Set WireGuard IP (without mask)
-#  set_fact:
-#    wireguard_ip: "{{ wireguard_address.split('/')[0] }}"
-#
-#
-#- name: Generate WireGuard configuration file
-#  template:
-#    src: wg.conf.j2
-#    dest: "{{ wireguard_remote_directory }}/{{ wireguard_interface }}.conf"
-#    owner: root
-#    group: root
-#    mode: 0600
-#  tags:
-#    - wg-config
-#  notify:
-#    - restart wireguard
-#
-#- name: Start and enable WireGuard service
-#  service:
-#    name: "wg-quick@{{ wireguard_interface }}"
-#    state: started
-#    enabled: yes
