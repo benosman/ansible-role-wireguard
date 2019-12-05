@@ -10,6 +10,9 @@
   tags:
     - wg-install
     - skip_ansible_lint
+  become: yes
+  become_method: su
+  become_user: "{{ wireguard_macos_homebrew_user }}"
 
 
 - name: Create WireGuard configuration directory
@@ -17,5 +20,6 @@
     dest: "{{ wireguard_macos_remote_directory }}"
     state: directory
     mode: 0700
+    owner: "{{ wireguard_macos_homebrew_user }}"
   tags:
    - wg-config

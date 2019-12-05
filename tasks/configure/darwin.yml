@@ -5,17 +5,24 @@
     dest: "{{ wireguard_macos_remote_directory }}/{{ item }}.conf"
     mode: 0600
   register: configuration
+  
+- name: Configure {{ item }} plist
+  template:
+    src: wg.plist.j2
+    dest: "{{ wireguard_macos_plist_path }}/com.wireguard.{{ item }}.plist"
+    mode: 0644
+  register: configuration
+  
+- name: Enable wg-quick@{{ item }} service
+  launchd:
+    name: com.wireguard.{{ item }}
+    state: started
+    enabled: yes
+  tags: install
+  when: wireguard_manage_services
 
-#- name: Enable wg-quick@{{ item }} service
-#  service:
-#    name: wg-quick@{{ item }}
-#    state: started
-#    enabled: yes
-#  tags: install
-#  when: wireguard_manage_services
-
-#- name: Restart wg-quick@{{ item }}
-#  service:
-#    name: wg-quick@{{ item }}
-#    state: restarted
-#  when: configuration is changed and wireguard_manage_services
+- name: Restart wg-quick@{{ item }}
+  launchd:
+    name: com.wireguard.{{ item }}
+    state: restarted
+  when: configuration is changed and wireguard_manage_services

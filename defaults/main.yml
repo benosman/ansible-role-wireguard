@@ -4,7 +4,10 @@ wireguard_remote_directory: "/etc/wireguard"
 
 # Directory to store WireGuard configuration on the mac remote hosts
 wireguard_macos_remote_directory: "/usr/local/etc/wireguard"
-
+wireguard_macos_wgquick_path: "/usr/local/bin/wg-quick"
+wireguard_macos_env_path: "/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" 
+wireguard_macos_plist_path: "/Library/LaunchDaemons"
+wireguard_macos_homebrew_user: ""
 
 
 wireguard_install: true
