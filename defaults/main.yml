@@ -30,11 +30,21 @@ wireguard_networks: []
 #   # listen_port:
 #   # fw_mark:
 #   # dns: []
-#   # MTU:
-#   # Table:
+#   # mtu:
+#   # table:
 #   # pre_up: []
 #   # post_up: []
 #   # pre_down: []
 #   # post_down: []
 #   # save_config:
 
+
+#######################################
+# Settings only relevant for Ubuntu
+#######################################
+
+# Set to "false" if package cache should not be updated
+wireguard_ubuntu_update_cache: false
+
+# Set package cache valid time
+wireguard_ubuntu_cache_valid_time: "3600"
